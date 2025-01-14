@@ -1,7 +1,6 @@
 class Solution(object):
     def kidsWithCandies(self, candies, extraCandies):
-        toBeat = max(candies) - extraCandies
-        return [candy >= toBeat for candy in candies]
+        return [candy >= max(candies) - extraCandies for candy in candies]
 
 
         
