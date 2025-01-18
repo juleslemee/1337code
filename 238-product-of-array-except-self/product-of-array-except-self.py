@@ -1,26 +1,19 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         n = len(nums)
-        leftProducts = [1]*n
-        rightProducts = [1]*n
-        answer = [1]*n
+        # Initialize the answer array to store left products
+        answer = [1] * n
 
+        # Calculate left products
         for i in range(1, n):
-            leftProducts[i] = leftProducts[i-1] * nums[i-1]
+            answer[i] = answer[i - 1] * nums[i - 1]
 
-        for i in range(n - 2, -1, -1):
-            rightProducts[i] = rightProducts[i+1] * nums[i+1]
-
-        for i in range(n):
-            answer[i] = leftProducts[i] * rightProducts[i]
+        # Now use a single variable to track the right product
+        right_product = 1
+        for i in range(n - 1, -1, -1):
+            # Multiply the current answer[i] by the running right product
+            answer[i] *= right_product
+            # Update the right product
+            right_product *= nums[i]
 
         return answer
-'''
-        for i in range(len(nums)):
-            temp = nums[:i] + nums[i+1:]
-            product = 1
-            for num in temp:
-                product *= num
-            answer.append(product)
-        return answer
-'''
