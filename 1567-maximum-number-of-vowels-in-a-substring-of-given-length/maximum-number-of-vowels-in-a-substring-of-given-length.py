@@ -15,6 +15,8 @@ class Solution:
                 if s[end] in vowels:
                     vows += 1
                 curlen += 1
+                maxvows = vows
+
             else:
                 start += 1
                 if s[start-1] in vowels:
@@ -23,7 +25,5 @@ class Solution:
                 if s[end] in vowels:
                     vows += 1
                 maxvows = max(vows, maxvows)
-            maxvows = max(vows, maxvows)
-
-
+            
         return maxvows
