@@ -2,7 +2,7 @@
 SELECT P.project_id, ROUND(SUM(E.experience_years) * 1.0 / COUNT(E.experience_years), 2) as average_years
 FROM
 Project as P
-JOIN
+INNER JOIN
 Employee as E
 ON
 P.employee_id = E.employee_id
