@@ -1,20 +1,12 @@
 /* Write your T-SQL query statement below */
-WITH all_first AS (
-    SELECT customer_id, MIN(order_date) as min_order_date
+SELECT 
+    ROUND(SUM(CASE WHEN d.order_date = d.customer_pref_delivery_date THEN 1 ELSE 0 END) 
+        * 100.0 / COUNT(DISTINCT d.customer_id), 2) AS immediate_percentage
+FROM Delivery d
+JOIN (
+    SELECT customer_id, MIN(order_date) AS min_order_date
     FROM Delivery
     GROUP BY customer_id
-),
-first_immediate AS (
-    SELECT af.customer_id, af.min_order_date
-    FROM all_first AS af
-    JOIN Delivery d ON d.customer_id = af.customer_id AND d.order_date = af.min_order_date
-    WHERE d.order_date = d.customer_pref_delivery_date
-)
-SELECT 
-ROUND(COUNT(fi.customer_id)*100.0/ COUNT(af.customer_id), 2) as immediate_percentage
-FROM
-first_immediate as fi
-FULL OUTER JOIN 
-all_first as af
-ON
-fi.customer_id = af.customer_id
+) first_orders 
+ON d.customer_id = first_orders.customer_id 
+AND d.order_date = first_orders.min_order_date;
