@@ -1,10 +1,5 @@
 class Solution:
     def closeStrings(self, word1: str, word2: str) -> bool:
-        # swap any two existing characters and/or swap all of one char with another
-        # so what's interesting is the characters. That's what we can change
-        # with a hashmap, we can store the char and count as key:val. does position matter?
-        # given all the modifications we can make, we just need to check that it has
-        #  both the right characters and the right counts (independently)
         hash1 = {}
         hash2 = {}
         for char1 in word1:
