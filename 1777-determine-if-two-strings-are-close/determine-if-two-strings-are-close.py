@@ -14,5 +14,4 @@ class Solution:
                 hash2[char2] = 1
         if sorted(list(hash1.keys())) == sorted(list(hash2.keys())) and sorted(list(hash1.values())) == sorted(list(hash2.values())):
             return True
-        else:
-            return False
+        return False
