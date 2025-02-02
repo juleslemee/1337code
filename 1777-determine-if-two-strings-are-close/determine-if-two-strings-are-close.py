@@ -1,15 +1,11 @@
 class Solution:
     def closeStrings(self, word1: str, word2: str) -> bool:
-
         hash1 = {}
         hash2 = {}
         for char in word1:
             hash1[char] = hash1.get(char, 0) + 1
         for char in word2:
             hash2[char] = hash2.get(char, 0) + 1
-
-        if set(hash1.keys()) != set(hash2.keys()):
-            return False
 
         counth1 = {}
         counth2 = {}
@@ -18,4 +14,4 @@ class Solution:
         for count in hash2.values():
             counth2[count] = counth2.get(count, 0) + 1
 
-        return counth1 == counth2
+        return set(hash1.keys()) == set(hash2.keys()) and counth1 == counth2
