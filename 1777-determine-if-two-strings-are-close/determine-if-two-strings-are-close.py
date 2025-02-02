@@ -17,11 +17,7 @@ class Solution:
                 hash2[char2] += 1
             else:
                 hash2[char2] = 1
-        h1k = sorted(list(hash1.keys()))
-        h2k = sorted(list(hash2.keys()))
-        h1v = sorted(list(hash1.values()))
-        h2v = sorted(list(hash2.values()))
-        if h1k == h2k and h1v == h2v:
+        if sorted(list(hash1.keys())) == sorted(list(hash2.keys())) and sorted(list(hash1.values())) == sorted(list(hash2.values())):
             return True
         else:
             return False
