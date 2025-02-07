@@ -6,14 +6,10 @@ SELECT
 customer_id
 FROM(
     SELECT
-    customer_id, COUNT(product_key) as county
-    FROM(
-        SELECT
-        DISTINCT customer_id, product_key
-        FROM
-        Customer
-    ) as Custy
+    customer_id, COUNT(DISTINCT product_key) as pCount
+    FROM
+    Customer
     GROUP BY
     customer_id
-) as Custy2
-WHERE county >= (SELECT COUNT(*) FROM Product)
+) as productCount
+WHERE pCount >= (SELECT COUNT(*) FROM Product)
