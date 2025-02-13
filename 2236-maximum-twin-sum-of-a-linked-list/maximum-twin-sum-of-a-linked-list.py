@@ -1,22 +1,23 @@
 class Solution:
     def pairSum(self, head: Optional[ListNode]) -> int:
-        if head == None:
-            return 0
-        if head.next.next == None:
-            return head.val + head.next.val
-        
-        values = []
-        i = 0
-        while head:
-            values.append(head.val)
-            head = head.next
+        slow, fast = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
 
-        curMax = 0
-        start = 0
-        end = len(values)-1
-        while end != 0:
-            curMax = max(curMax, (values[start]+ values[end]))
-            start += 1
-            end -= 1
+        prev, curr = None, slow
+        while curr:
+            nextNode = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nextNode
 
-        return curMax
+        maxSum = 0
+        first, second = head, prev
+
+        while second:
+            maxSum = max(maxSum, first.val + second.val)
+            first = first.next
+            second = second.next
+
+        return maxSum
