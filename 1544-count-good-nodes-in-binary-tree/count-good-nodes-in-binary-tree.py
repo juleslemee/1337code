@@ -8,7 +8,10 @@ class Solution:
     def goodNodes(self, root: TreeNode, maxSoFar=float('-inf')) -> int:
         if root is None:
             return 0
-        count = 1 if root.val >= maxSoFar else 0
+        if root.val >= maxSoFar:
+            count = 1
+        else:
+            count = 0
         newMax = max(maxSoFar, root.val)
         count += self.goodNodes(root.left, newMax)
         count += self.goodNodes(root.right, newMax)
