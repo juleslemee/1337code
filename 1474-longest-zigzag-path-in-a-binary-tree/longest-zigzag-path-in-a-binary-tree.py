@@ -7,10 +7,6 @@
 class Solution:
     def longestZigZag(self, root: Optional[TreeNode]) -> int:
         def dfs(node, direction, length):
-            """ 
-            direction = 0 -> came from left, now go right
-            direction = 1 -> came from right, now go left
-            """
             if not node:
                 return
             
